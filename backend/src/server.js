@@ -6,18 +6,21 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 const app = express();
-const PORT = process.env.PORT || 3001;
+// Cambia el puerto a 3000 para coincidir con el proxy
+const PORT = process.env.PORT || 3000;
 
-// Middlewares
 app.use(cors());
 app.use(morgan('dev'));
 app.use(express.json());
 
-// Ruta de prueba
+// Ruta modificada para coincidir con la solicitud del frontend
 app.get('/api', (req, res) => {
-  res.json({ message: 'API funcionando!' });
+  res.json({ 
+    message: '¡Conexión exitosa desde Astro!',
+    timestamp: new Date().toISOString()
+  });
 });
 
 app.listen(PORT, () => {
-  console.log(`Servidor backend en http://localhost:${PORT}`);
+  console.log(`🔥 Servidor backend en http://localhost:${PORT}`);
 });
